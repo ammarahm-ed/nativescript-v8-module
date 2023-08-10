@@ -1,0 +1,4 @@
+module HelloWorldInstaller {
+    header "HelloWorldInstaller.h"
+    export *
+}

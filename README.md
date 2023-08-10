@@ -24,7 +24,7 @@ npm run setup
 npm start
 ```
 
-- @nativescript
+- [v8-module-cpp](packages/v8-module-cpp/README.md)
 
 # How to use?
 

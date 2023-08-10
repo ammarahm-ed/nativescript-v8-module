@@ -42,3 +42,8 @@ Thumbs.db
 
 *.tgz
 packages/**/angular/dist
+
+
+packages/**/src-native/android/.cxx
+packages/**/src-native/android/build
+packages/**/src-native/android/*.aar

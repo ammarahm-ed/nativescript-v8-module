@@ -1,0 +1,65 @@
+{
+  "name": "v8-module-cpp",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/v8-module-cpp",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "options": {
+        "outputPath": "dist/packages/v8-module-cpp",
+        "tsConfig": "packages/v8-module-cpp/tsconfig.json",
+        "packageJson": "packages/v8-module-cpp/package.json",
+        "main": "packages/v8-module-cpp/index.d.ts",
+        "assets": [
+          "packages/v8-module-cpp/*.md",
+          "packages/v8-module-cpp/index.d.ts",
+          "LICENSE",
+          {
+            "glob": "**/*",
+            "input": "packages/v8-module-cpp/platforms/",
+            "output": "./platforms/"
+          }
+        ],
+        "dependsOn": [
+          {
+            "target": "build.all",
+            "projects": "dependencies"
+          }
+        ]
+      }
+    },
+    "build.all": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["node tools/scripts/build-finish.ts v8-module-cpp"],
+        "parallel": false
+      },
+      "outputs": ["dist/packages/v8-module-cpp"],
+      "dependsOn": [
+        {
+          "target": "build.all",
+          "projects": "dependencies"
+        },
+        {
+          "target": "build",
+          "projects": "self"
+        }
+      ]
+    },
+    "focus": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["nx g @nativescript/plugin-tools:focus-packages v8-module-cpp"],
+        "parallel": false
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["packages/v8-module-cpp/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

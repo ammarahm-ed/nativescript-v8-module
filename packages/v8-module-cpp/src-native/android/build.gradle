@@ -1,0 +1,92 @@
+apply plugin: 'com.android.library'
+
+def safeExtGet(prop, fallback) {
+    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+}
+
+def resolveBuildType() {
+    Gradle gradle = getGradle()
+    String tskReqStr = gradle.getStartParameter().getTaskRequests()['args'].toString()
+
+    return tskReqStr.contains('Release') ? 'release' : 'debug'
+}
+
+def ROOT_PROJECT_PATH = rootProject.projectDir.getAbsolutePath()
+
+// The type of nativescript lib to link against, can be debug or release.
+def NATIVESCRIPT_LIB_TYPE = resolveBuildType() === "debug" ? "nativescript-regular" : "nativescript-optimized"
+// The path where the nativescript aar files will be read from.
+def NATIVESCRIPT_AAR_PATH = "${ROOT_PROJECT_PATH}/app/libs/runtime-libs/${NATIVESCRIPT_LIB_TYPE}.aar"
+// The path where we will be extracting arr source files
+def NATIVESCRIPT_SO_PATH = "${project.projectDir.getAbsolutePath()}/${NATIVESCRIPT_LIB_TYPE}.aar"
+
+def IS_DEBUG = resolveBuildType() == 'debug'
+
+android {
+  namespace 'com.helloworldlibrary'
+
+  compileSdk = safeExtGet("NS_DEFAULT_COMPILE_SDK_VERSION", 32) as int
+  defaultConfig {
+    minSdk = safeExtGet("NS_DEFAULT_MIN_SDK_VERSION", 19) as int
+    targetSdk = safeExtGet("NS_DEFAULT_COMPILE_SDK_VERSION", 32) as int
+
+    multiDexEnabled true
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    consumerProguardFiles "consumer-rules.pro"
+
+    externalNativeBuild {
+      cmake {
+        cppFlags "-O2 -frtti -fexceptions -Wall -Wno-unused-variable -fstack-protector-all"
+        arguments "-DANDROID_TOOLCHAIN=clang",
+          "-DANDROID_STL=c++_shared",
+          "-DNATIVESCRIPT_SO_PATH=${NATIVESCRIPT_SO_PATH}"
+      }
+    }
+    ndk {
+      abiFilters 'x86','x86_64', 'armeabi-v7a', 'arm64-v8a'
+    }
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  externalNativeBuild {
+    cmake {
+      path "CMakeLists.txt"
+    }
+  }
+
+  ndkVersion '21.4.7075529'
+
+  // Exclude these as we know they will be present in the final app build always.
+  packagingOptions {
+    excludes = ["**/libNativeScript.so", "**/libc++_shared.so"]
+  }
+}
+
+dependencies {
+  implementation 'androidx.multidex:multidex:2.0.1'
+
+  // To successfully build we need to link with nativescript so files
+  // that are present in the root project. This allows us to not keep a separate
+  // copy of these here and maintain it and directly link with the latest
+  // nativescript installed in an app.
+  def file = new File(NATIVESCRIPT_AAR_PATH)
+  def aarFolder = new File("$buildDir/../$file.name")
+  // We always want to keep an updated version of the aar so if we found one
+  // we will just delete it.
+  if (aarFolder.exists()) aarFolder.deleteDir()
+  copy {
+    from zipTree(file)
+    into "$buildDir/../$file.name"
+    include "jni/**/*"
+  }
+}

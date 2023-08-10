@@ -20,7 +20,8 @@
       }
     ],
     "paths": {
-      "@demo/shared": ["tools/demo/index.ts"]
+      "@demo/shared": ["tools/demo/index.ts"],
+      "v8-module-cpp": ["packages/v8-module-cpp/index.d.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

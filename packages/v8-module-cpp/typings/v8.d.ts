@@ -1,0 +1,3 @@
+const HelloWorld: {
+  sayHelloWorld: () => string;
+};

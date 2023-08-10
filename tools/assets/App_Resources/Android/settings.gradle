@@ -1,0 +1,3 @@
+def lib_name = "helloworldlib"
+include ":${lib_name}"
+project(":${lib_name}").projectDir = file("../../../../packages/v8-module-cpp/src-native/android");
