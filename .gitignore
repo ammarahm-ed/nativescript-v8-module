@@ -50,6 +50,6 @@ packages/**/src-native/android/*.aar
 packages/**/src-native/**/*.so
 packages/**/src-native/**/*.xcframework
 
-rust/target
+rust/**/target
 
 
