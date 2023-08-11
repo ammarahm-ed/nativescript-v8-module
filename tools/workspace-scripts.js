@@ -35,6 +35,24 @@ module.exports = {
           description: '⚆  Run Android  🤖',
         },
       },
+      '...Angular...': {
+        script: `npx cowsay "Test all the Angles!"`,
+        description: ` 🔻 Angular`,
+      },
+      'demo-angular': {
+        clean: {
+          script: 'nx run demo-angular:clean',
+          description: '⚆  Clean  🧹',
+        },
+        ios: {
+          script: 'nx run demo-angular:ios',
+          description: '⚆  Run iOS  ',
+        },
+        android: {
+          script: 'nx run demo-angular:android',
+          description: '⚆  Run Android  🤖',
+        },
+      },
     },
     '⚙️': {
       script: `npx cowsay "@nativescript/* packages will keep your ⚙️ cranking"`,
@@ -43,13 +61,6 @@ module.exports = {
     // packages
     // build output is always in dist/packages
     '@nativescript': {
-      // v8-module-cpp
-      'v8-module-cpp': {
-        build: {
-          script: 'nx run v8-module-cpp:build.all',
-          description: 'v8-module-cpp: Build',
-        },
-      },
       'build-all': {
         script: 'nx run-many --target=build.all --all',
         description: 'Build all packages',
@@ -60,10 +71,6 @@ module.exports = {
       description: '_____________  Focus (VS Code supported)  _____________',
     },
     focus: {
-      'v8-module-cpp': {
-        script: 'nx run v8-module-cpp:focus',
-        description: 'Focus on v8-module-cpp',
-      },
       reset: {
         script: 'nx g @nativescript/plugin-tools:focus-packages',
         description: 'Reset Focus',

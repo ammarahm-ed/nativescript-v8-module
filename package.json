@@ -11,7 +11,8 @@
     "publish-packages": "nx g @nativescript/plugin-tools:publish",
     "sync-packages-with-demos": "nx g @nativescript/plugin-tools:sync-packages-with-demos",
     "remove-package": "nx g @nativescript/plugin-tools:remove-package",
-    "add-demo": "nx g @nativescript/plugin-tools:add-demo"
+    "add-demo": "nx g @nativescript/plugin-tools:add-demo",
+    "add-angular": "nx g @nativescript/plugin-tools:add-angular"
   },
   "private": false,
   "devDependencies": {
@@ -20,7 +21,24 @@
     "@nativescript/types": "~8.5.0",
     "@nativescript/webpack": "~5.0.17",
     "husky": "^8.0.0",
-    "typescript": "~4.8.0"
+    "typescript": "~4.8.0",
+    "@angular/animations": "^15.0.0",
+    "@angular/common": "^15.0.0",
+    "@angular/compiler": "^15.0.0",
+    "@angular/compiler-cli": "^15.0.0",
+    "@angular/core": "^15.0.0",
+    "@angular/forms": "^15.0.0",
+    "@angular/platform-browser": "^15.0.0",
+    "@angular/platform-browser-dynamic": "^15.0.0",
+    "@angular/router": "^15.0.0",
+    "@nativescript/angular": "^15.0.0",
+    "@ngtools/webpack": "^15.0.0",
+    "nativescript-vue": "~2.9.0",
+    "nativescript-vue-template-compiler": "~2.9.0",
+    "ng-packagr": "^15.0.0",
+    "rxjs": "~7.5.0",
+    "zone.js": "~0.11.1",
+    "@angular-devkit/build-angular": "^15.0.0"
   },
   "lint-staged": {
     "**/*.{js,ts,scss,json,html}": [
