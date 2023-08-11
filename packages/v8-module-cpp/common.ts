@@ -20,6 +20,8 @@ if (__ANDROID__) {
 
 export class HelloWorldCommon extends Observable {
   static sayHelloWorld() {
-    return HelloWorld.sayHelloWorld();
+    // HelloWorld.sayHelloWorld();
+
+    return HelloWorld.sayHelloWorldFromRust();
   }
 }

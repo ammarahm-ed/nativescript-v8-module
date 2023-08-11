@@ -19,9 +19,12 @@ include_directories(
         ${PROJECT_SOURCE_DIR}/src/main/cpp/include/libc++
         ${PROJECT_SOURCE_DIR}/src/main/cpp/include
         ${PROJECT_SOURCE_DIR}/src/main/cpp
+        # Include headers of our rust library, if you don't use it, disable this line.
+        ${PROJECT_SOURCE_DIR}/src/main/cpp/my_sdk/include
 
         # The is the folder for the common cpp code we will share with ios
         ../../platforms/ios/src/common-cpp
+        ../../
 )
 
 
@@ -57,6 +60,8 @@ target_link_libraries(${PACKAGE_NAME}
           ${log-lib}
           ${NATIVESCRIPT_SO_PATH}/jni/${ANDROID_ABI}/libNativeScript.so
           android
+          # Remove this line if not using the rust library
+          ${PROJECT_SOURCE_DIR}/src/main/jniLibs/${ANDROID_ABI}/libmy_sdk.so
           )
 
 

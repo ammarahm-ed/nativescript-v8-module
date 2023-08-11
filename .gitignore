@@ -47,3 +47,9 @@ packages/**/angular/dist
 packages/**/src-native/android/.cxx
 packages/**/src-native/android/build
 packages/**/src-native/android/*.aar
+packages/**/src-native/**/*.so
+packages/**/src-native/**/*.xcframework
+
+rust/target
+
+

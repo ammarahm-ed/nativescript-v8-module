@@ -1,0 +1,15 @@
+[package]
+name = "my_sdk"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "my_sdk"
+crate-type = ["staticlib", "cdylib"]
+
+[dependencies]
+libc = "0.2.80"
+jni = { version = "0.18.0", optional = true, default-features = false }
+
+[features]
+default = ["jni"]

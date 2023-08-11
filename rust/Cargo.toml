@@ -1,0 +1,14 @@
+[workspace]
+members = ["my_sdk"]
+resolver = "2"
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+lto = false
+opt-level = "z"
+debug = false
+incremental = false
+strip = true
+debug-assertions = false
+overflow-checks = false
