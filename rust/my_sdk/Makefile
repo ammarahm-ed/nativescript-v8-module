@@ -1,6 +1,6 @@
 ARCHS_IOS = x86_64-apple-ios aarch64-apple-ios aarch64-apple-ios-sim
 ARCHS_ANDROID = i686-linux-android x86_64-linux-android aarch64-linux-android armv7-linux-androideabi
-LIB = libmy_sdk.a
+LIB = libmy_sdk.dylib
 XCFRAMEWORK = MySdk.xcframework
 RUST_LIB = my_sdk
 
