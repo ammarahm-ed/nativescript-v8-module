@@ -1,4 +1,2 @@
 # Exposes NativeScript v8 headers to our module sources
 pod 'NativeScript', path: "../../node_modules/v8-module-cpp/src-native/ios/NativeScript.podspec"
-# Remove this line if you are not using the rust library
-pod 'MySdk', path: "../../node_modules/v8-module-cpp/src-native/ios/MySdk.podspec"
